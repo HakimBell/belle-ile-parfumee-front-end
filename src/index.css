@@ -74,17 +74,17 @@
     @apply medium-15 border border-secondary bg-secondary px-7 py-3 text-white transition-all hover:bg-[#ff6b1c] rounded-full;
   }
 
-  .max-container {
+  /* .max-container {
     @apply mx-auto max-w-[1440px];
-  }
+  } */
 
   .padding-container {
     @apply px-6 lg:px-20;
   }
 
-  .max_padd_container {
+  /* .max_padd_container {
     @apply mx-auto max-w-[1440px] px-6 lg:px-20;
-  }
+  } */
 
   .flexCenter {
     @apply flex items-center justify-center;

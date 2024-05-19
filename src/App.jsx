@@ -13,9 +13,9 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/mens" element={<Category />} />
-          <Route path="/womens" element={<Category />} />
-          <Route path="/kids" element={<Category />} />
+          <Route path="/mens" element={<Category gender="Masculin" />} />
+          <Route path="/womens" element={<Category gender="Féminin" />} />
+          <Route path="/kids" element={<Category gender="Mixte" />} />
           <Route path="/product" element={<Product />}>
             <Route path=":productId" element={<Product />} />
           </Route>

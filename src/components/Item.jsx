@@ -21,7 +21,7 @@ const Item = ({ id, name, ml, price, image }) => {
       </div>
       <div className="p-4 overflow-hidden">
         <h4 className="my-[6px] medium-16 line-clamp-2 text-gray-30">{name}</h4>
-        <div className="flex gap-5">
+        <div className="flex justify-between gap-5">
           <div className="bold-16">{ml}</div>
           <div className="text-secondary bold-16 ">{price}€</div>
         </div>

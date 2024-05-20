@@ -5,7 +5,7 @@ function Navbar({ containerStyles }) {
   return (
     <nav className={`${containerStyles}`}>
       <NavLink
-        to={"/"}
+        to={"/home"}
         className={({ isActive }) => (isActive ? "active_link" : "")}
       >
         <div className="flexCenter gap-x-1">
@@ -32,7 +32,7 @@ function Navbar({ containerStyles }) {
         </div>
       </NavLink>
       <NavLink
-        to={"/kids"}
+        to={"/mixte"}
         className={({ isActive }) => (isActive ? "active_link" : "")}
       >
         <div className="flexCenter gap-x-1">

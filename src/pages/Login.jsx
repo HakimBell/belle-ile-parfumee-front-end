@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import parfumFormImage from "../assets/parfum-form.jpg";
+import { jwtDecode } from "jwt-decode";
+import { SnackbarProvider, useSnackbar } from "notistack";
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  const [token, setToken] = useState("");
+  const [user, setUser] = useState({});
+  const { enqueueSnackbar } = useSnackbar();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -15,9 +20,20 @@ function Login() {
         password,
       });
       console.log(response.data);
+
+      const { token } = response.data;
+      const decodedUser = jwtDecode(token);
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(decodedUser));
+      setToken(token);
+      setUser(decodedUser);
+      enqueueSnackbar("Connexion réussie!", { variant: "success" });
       navigate("/home");
     } catch (error) {
       console.error(error);
+      enqueueSnackbar("Erreur lors de la connexion. Veuillez réessayer.", {
+        variant: "error",
+      });
     }
   };
 

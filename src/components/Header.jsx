@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import Navbar from "./Navbar";
 import { MdClose, MdMenu } from "react-icons/md";
@@ -8,6 +8,18 @@ import { FaOpencart } from "react-icons/fa";
 const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const toggleMenu = () => setMenuOpened(!menuOpened);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    console.log("Déconnexion en cours...");
+    localStorage.removeItem("user");
+    localStorage.removeItem("newUser");
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+  const userLoggedIn =
+    localStorage.getItem("user") && localStorage.getItem("token");
+  if (!userLoggedIn) return null;
+
   return (
     <header className="fixed top-0 left-0 m-auto max_padd_container w-full bg-white ring-slate-900/5 z-10">
       <div className="px-4 flexBetween py-3 max-xs:px-2 ">
@@ -51,12 +63,13 @@ const Header = () => {
               </span>
             </NavLink>
             <NavLink
-              to={"logout"}
+              to={"login"}
               className={"btn_secondary_rounded flexCenter gap-x-2 medium-16"}
             >
-              <CgLogOut />
-              {/* <img src={logo} alt="logutIcon" height={19} width={19} /> */}
-              Logout
+              <button onClick={handleLogout}>
+                <CgLogOut />
+                Logout
+              </button>
             </NavLink>
           </div>
         </div>

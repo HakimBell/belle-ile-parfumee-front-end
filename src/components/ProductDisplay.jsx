@@ -1,7 +1,10 @@
 import { MdStar } from "react-icons/md";
+import { ShopContext } from "../context/ShopContext";
+import { useContext } from "react";
 
 function ProductDisplay(props) {
   const { product } = props;
+  const { addToCart } = useContext(ShopContext);
   return (
     <section className="flex flex-col items-center xl:flex-row gap-4 p-3">
       <div className="max-w-[400px] flex-shrink-0">

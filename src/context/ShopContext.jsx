@@ -1,12 +1,14 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 export const ShopContext = createContext(null);
+import { useSnackbar } from "notistack";
 
 const ShopContextProvider = (props) => {
   const [all_products, setAll_products] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user ? user.id : null;
+  const { enqueueSnackbar } = useSnackbar();
   console.log(userId);
   useEffect(() => {
     axios
@@ -35,10 +37,21 @@ const ShopContextProvider = (props) => {
         `http://localhost:4567/products/${productId}/addToCart/${userId}`
       );
       console.log("Le produit a été ajouté au panier avec succès.");
+      enqueueSnackbar("Le produit a été ajouté au panier avec succès.", {
+        variant: "success",
+      });
+      fetchCartItems();
+      getTotalCartItems();
     } catch (error) {
       console.error(
         "Erreur lors de l'ajout du produit au panier :",
         error.message
+      );
+      enqueueSnackbar(
+        "Une erreur est survenue lors du chargement des produits.",
+        {
+          variant: "error",
+        }
       );
     }
   };
@@ -49,7 +62,7 @@ const ShopContextProvider = (props) => {
         `http://localhost:4567/products/${userId}/delete-product/${productId}`
       );
       fetchCartItems();
-      window.location.reload();
+      // window.location.reload();
       console.log("Le produit a été supprimé du panier avec succès.");
     } catch (error) {
       console.error(
@@ -82,12 +95,55 @@ const ShopContextProvider = (props) => {
     return total;
   };
 
+  const getTotalCartItems = () => {
+    let totalItem = 0;
+    for (const item of cartItems) {
+      console.log(`Article: ${item.id}, Quantité: ${item.quantity}`);
+      totalItem += item.quantity;
+    }
+    return totalItem;
+  };
+
+  const increaseQuantity = (productId) => {
+    console.log("Cart items before increase:", cartItems);
+
+    const updatedCartItems = cartItems.map((item) => {
+      console.log(`Checking item with ID ${item.product._id}`);
+      if (item.product._id === productId) {
+        console.log(`Increasing quantity of item with ID ${productId}`);
+        return { ...item, quantity: item.quantity + 1 };
+      }
+      return item;
+    });
+
+    console.log("Updated cart items:", updatedCartItems);
+    setCartItems(updatedCartItems);
+  };
+  const decreaseQuantity = (productId) => {
+    console.log("Cart items before increase:", cartItems);
+
+    const updatedCartItems = cartItems.map((item) => {
+      console.log(`Checking item with ID ${item.product._id}`);
+      if (item.product._id === productId) {
+        console.log(`Increasing quantity of item with ID ${productId}`);
+        return { ...item, quantity: item.quantity - 1 };
+      }
+      return item;
+    });
+
+    console.log("Updated cart items:", updatedCartItems);
+    setCartItems(updatedCartItems);
+  };
   const contextValue = {
     all_products,
     addToCart,
     cartItems,
     removeFromCart,
     getTotalCartAmount,
+    fetchCartItems,
+    getTotalCartItems,
+    increaseQuantity,
+    decreaseQuantity,
   };
   return (
     <ShopContext.Provider value={contextValue}>

@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
-
+import { ShopContext } from "../context/ShopContext";
+import { useContext } from "react";
 const Item = ({ id, name, ml, price, image }) => {
+  const { addToCart } = useContext(ShopContext);
   return (
     <div className="rounded-xl overflow-hidden shadow-lg">
       <div className="relative flexCenter group overflow-hidden transition-all duration-100">
@@ -25,6 +27,12 @@ const Item = ({ id, name, ml, price, image }) => {
           <div className="bold-16">{ml}</div>
           <div className="text-secondary bold-16 ">{price}€</div>
         </div>
+        <button
+          onClick={() => addToCart(id)}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          Ajouter au panier
+        </button>
       </div>
     </div>
   );

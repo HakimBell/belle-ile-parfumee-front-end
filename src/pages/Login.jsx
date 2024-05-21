@@ -3,7 +3,7 @@ import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import parfumFormImage from "../assets/parfum-form.jpg";
 import { jwtDecode } from "jwt-decode";
-import { SnackbarProvider, useSnackbar } from "notistack";
+import { useSnackbar } from "notistack";
 
 function Login() {
   const [email, setEmail] = useState("");

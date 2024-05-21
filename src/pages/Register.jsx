@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import parfumFormImage from "../assets/parfum-form.jpg";
+import { useSnackbar } from "notistack";
+
 function Register() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -11,7 +13,7 @@ function Register() {
   const [zipCode, setZipCode] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-
+  const { enqueueSnackbar } = useSnackbar();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -25,9 +27,13 @@ function Register() {
         phoneNumber,
       });
       console.log("Inscription réussie :", response.data);
+      enqueueSnackbar("Inscription réussie!", { variant: "success" });
       navigate("/login");
     } catch (error) {
       console.error("Erreur lors de l'inscription :", error);
+      enqueueSnackbar("Erreur lors de l'inscription. Veuillez réessayer.", {
+        variant: "error",
+      });
     }
   };
   return (

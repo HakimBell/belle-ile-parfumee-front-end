@@ -3,12 +3,14 @@ import logo from "../assets/logo.svg";
 import Navbar from "./Navbar";
 import { MdClose, MdMenu } from "react-icons/md";
 import { CgLogOut } from "react-icons/cg";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaOpencart } from "react-icons/fa";
+import { ShopContext } from "../context/ShopContext";
 const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const toggleMenu = () => setMenuOpened(!menuOpened);
   const navigate = useNavigate();
+  const { getTotalCartItems } = useContext(ShopContext);
   const handleLogout = () => {
     console.log("Déconnexion en cours...");
     localStorage.removeItem("user");
@@ -59,7 +61,7 @@ const Header = () => {
             <NavLink to={"cart-page"} className={"flex"}>
               <FaOpencart className="p-1 h-8 w-8 ring-slate-900/30 ring-1 rounded-full" />
               <span className="relative flexCenter w-5 h-5 rounded-full bg-secondary text-white medium-14 -top-2">
-                0
+                {getTotalCartItems()}
               </span>
             </NavLink>
             <NavLink

@@ -53,7 +53,7 @@ function Register() {
             </p>
           </div>
           <div className=" w-full lg:w-1/2 py-16 px-12">
-            <h2 className="text-3xl mb-4">Register</h2>
+            <h2 className="text-3xl mb-4">Créer un compte</h2>
             <p className="mb-4">Inscrivez-vous!</p>
             <form onSubmit={handleSubmit}>
               <input
@@ -100,7 +100,7 @@ function Register() {
               />
               <input
                 type="text"
-                placeholder="phone number"
+                placeholder="Numéro de téléphone"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 className="border border-gray-400 py-1 px-2 w-full mb-2"

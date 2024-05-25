@@ -43,16 +43,14 @@ const ShopContextProvider = (props) => {
       fetchCartItems();
       getTotalCartItems();
     } catch (error) {
+      console.log(userId);
       console.error(
         "Erreur lors de l'ajout du produit au panier :",
         error.message
       );
-      enqueueSnackbar(
-        "Une erreur est survenue lors du chargement des produits.",
-        {
-          variant: "error",
-        }
-      );
+      enqueueSnackbar("Une erreur est survenue lors de l'ajout au panier.", {
+        variant: "error",
+      });
     }
   };
 

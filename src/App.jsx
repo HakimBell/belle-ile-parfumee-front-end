@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Product from "./pages/Product";
 import Footer from "./components/Footer";
+import ListProducts from "./components/ListProducts";
 function App() {
   return (
     <main className="bg-primary text-tertiary">
@@ -24,6 +25,7 @@ function App() {
             <Route path=":productId" element={<Product />} />
           </Route>
           <Route path="/cart-page" element={<Cart />} />
+          <Route path="/listproduct" element={<ListProducts />} />
         </Routes>
         <Footer />
       </BrowserRouter>

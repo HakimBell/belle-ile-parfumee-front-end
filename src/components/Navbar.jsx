@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { MdHomeFilled, MdCategory, MdShop2, MdContacts } from "react-icons/md";
-
+import { FaClipboardList } from "react-icons/fa";
 function Navbar({ containerStyles }) {
   return (
     <nav className={`${containerStyles}`}>
@@ -38,6 +38,16 @@ function Navbar({ containerStyles }) {
         <div className="flexCenter gap-x-1">
           <MdContacts />
           Mixte
+        </div>
+      </NavLink>
+
+      <NavLink
+        to={"/listproduct"}
+        className={({ isActive }) => (isActive ? "active_link" : "")}
+      >
+        <div className="flexCenter gap-x-1">
+          <FaClipboardList />
+          Product List
         </div>
       </NavLink>
     </nav>

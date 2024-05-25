@@ -50,6 +50,15 @@ function Navbar({ containerStyles }) {
           Product List
         </div>
       </NavLink>
+      <NavLink
+        to={"/addproduct"}
+        className={({ isActive }) => (isActive ? "active_link" : "")}
+      >
+        <div className="flexCenter gap-x-1">
+          <FaClipboardList />
+          Add Product
+        </div>
+      </NavLink>
     </nav>
   );
 }

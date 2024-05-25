@@ -1,12 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { TbTrash } from "react-icons/tb";
 import axios from "axios";
+import { useSnackbar } from "notistack";
 function ListProducts() {
   const [allproducts, setAllproducts] = useState([]);
+  const { enqueueSnackbar } = useSnackbar();
   const fetchInfo = async () => {
     try {
       const response = await axios.get("http://localhost:4567/products/all");
-      setAllproducts(response.data);
+      console.log("Informations des produits :", response.data);
+      const formattedProducts = response.data.map((product) => ({
+        id: product._id,
+        name: product.name,
+        ml: product.ml,
+        price: product.price,
+        image: product.image,
+        description: product.description,
+        gender: product.gender,
+      }));
+
+      console.log("Produits formatés :", formattedProducts);
+
+      setAllproducts(formattedProducts);
     } catch (error) {
       console.error("Erreur lors de la récupération des informations :", error);
     }
@@ -19,8 +34,12 @@ function ListProducts() {
   const remove_product = async (id) => {
     try {
       await axios.delete(`http://localhost:4567/products/${id}/delete-product`);
+      enqueueSnackbar("Produit supprimé!", { variant: "success" });
     } catch (error) {
       console.error("Erreur lors de la suppression du produit :", error);
+      enqueueSnackbar("Erreur lors de la suppression d'un produit.", {
+        variant: "error",
+      });
     }
     await fetchInfo();
   };

@@ -28,7 +28,7 @@ const Header = () => {
         {/* logo */}
         <div>
           <Link>
-            <img src={logo} alt="" height={100} width={100} />
+            <img src={logo} alt="" height={88} width={66} />
           </Link>
         </div>
 

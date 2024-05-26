@@ -6,6 +6,7 @@ import { IoMdAdd } from "react-icons/io";
 import updateParfum from "../assets/update-parfum.jpg";
 
 function AddProduct() {
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -28,7 +29,12 @@ function AddProduct() {
     try {
       const response = await axios.post(
         "http://localhost:4567/products/add-product",
-        formData
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Inclure le token dans les en-têtes de la requête
+          },
+        }
       );
       console.log("Réponse du serveur:", response.data);
       enqueueSnackbar("Ajout Produit réussie!", { variant: "success" });

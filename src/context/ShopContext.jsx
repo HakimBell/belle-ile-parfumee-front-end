@@ -8,11 +8,17 @@ const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
   const userId = user ? user.id : null;
+  const token = localStorage.getItem("token");
   const { enqueueSnackbar } = useSnackbar();
   console.log(userId);
   useEffect(() => {
     axios
-      .get("http://localhost:4567/products/all", {})
+      .get("http://localhost:4567/products/all", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
       .then((response) => {
         const products = response.data.map((product) => ({
           id: product._id,
@@ -34,7 +40,13 @@ const ShopContextProvider = (props) => {
   const addToCart = async (productId) => {
     try {
       await axios.post(
-        `http://localhost:4567/products/${productId}/addToCart/${userId}`
+        `http://localhost:4567/products/${productId}/addToCart/${userId}`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Inclure le token dans les en-têtes de la requête
+          },
+        }
       );
       console.log("Le produit a été ajouté au panier avec succès.");
       enqueueSnackbar("Le produit a été ajouté au panier avec succès.", {
@@ -57,7 +69,12 @@ const ShopContextProvider = (props) => {
   const removeFromCart = async (productId) => {
     try {
       await axios.delete(
-        `http://localhost:4567/products/${userId}/delete-product/${productId}`
+        `http://localhost:4567/products/${userId}/delete-product/${productId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       fetchCartItems();
       // window.location.reload();
@@ -73,7 +90,12 @@ const ShopContextProvider = (props) => {
   const fetchCartItems = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4567/products/${userId}/cart`
+        `http://localhost:4567/products/${userId}/cart`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Inclure le token dans les en-têtes de la requête
+          },
+        }
       );
       setCartItems(response.data);
     } catch (error) {

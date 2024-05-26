@@ -7,9 +7,14 @@ import { useSnackbar } from "notistack";
 function ListProducts() {
   const [allproducts, setAllproducts] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
+  const token = localStorage.getItem("token");
   const fetchInfo = async () => {
     try {
-      const response = await axios.get("http://localhost:4567/products/all");
+      const response = await axios.get("http://localhost:4567/products/all", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log("Informations des produits :", response.data);
       const formattedProducts = response.data.map((product) => ({
         id: product._id,
@@ -35,7 +40,14 @@ function ListProducts() {
 
   const remove_product = async (id) => {
     try {
-      await axios.delete(`http://localhost:4567/products/${id}/delete-product`);
+      await axios.delete(
+        `http://localhost:4567/products/${id}/delete-product`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       enqueueSnackbar("Produit supprimé!", { variant: "success" });
     } catch (error) {
       console.error("Erreur lors de la suppression du produit :", error);

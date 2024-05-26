@@ -6,6 +6,7 @@ import updateParfum from "../assets/update-parfum.jpg";
 
 function UpdateProduct() {
   const { productId } = useParams();
+  const token = localStorage.getItem("token");
   const [productData, setProductData] = useState({
     name: "",
     description: "",
@@ -20,7 +21,12 @@ function UpdateProduct() {
     const fetchProductData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4567/products/${productId}`
+          `http://localhost:4567/products/${productId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setProductData(response.data);
       } catch (error) {
@@ -44,7 +50,12 @@ function UpdateProduct() {
     try {
       await axios.put(
         `http://localhost:4567/products/${productId}/update-product`,
-        productData
+        productData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       enqueueSnackbar("Produit modifié avec succés!", { variant: "success" });
       navigate("/home");

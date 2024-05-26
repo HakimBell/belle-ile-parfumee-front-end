@@ -9,7 +9,7 @@ function Category({ gender }) {
       <div>
         <div className="my-8 mx-2">
           <h5 className="text-center">
-            <h3 className="h3 text-center">Parfums</h3>
+            <h3 className="h3 text-center">{gender}</h3>
             <hr className="h-[3px] md:w-1/2 mx-auto bg-gradient-to-l from-transparent via-black to-transparent mb-16" />
           </h5>
         </div>

@@ -9,6 +9,7 @@ import Product from "./pages/Product";
 import Footer from "./components/Footer";
 import ListProducts from "./components/ListProducts";
 import AddProduct from "./components/AddProduct";
+import UpdateProduct from "./components/UpdateProduct";
 function App() {
   return (
     <main className="bg-primary text-tertiary">
@@ -27,6 +28,7 @@ function App() {
           </Route>
           <Route path="/cart-page" element={<Cart />} />
           <Route path="/listproduct" element={<ListProducts />} />
+          <Route path="/edit/:productId" element={<UpdateProduct />} />
           <Route path="/addproduct" element={<AddProduct />} />
         </Routes>
         <Footer />

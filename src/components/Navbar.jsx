@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
-import { MdHomeFilled, MdCategory, MdShop2, MdContacts } from "react-icons/md";
+import { MdHomeFilled, MdContacts } from "react-icons/md";
+import { IoMdFemale } from "react-icons/io";
+import { IoMdMale } from "react-icons/io";
 import { FaClipboardList } from "react-icons/fa";
+import { MdAdd } from "react-icons/md";
 function Navbar({ containerStyles }) {
   return (
     <nav className={`${containerStyles}`}>
@@ -18,7 +21,7 @@ function Navbar({ containerStyles }) {
         className={({ isActive }) => (isActive ? "active_link" : "")}
       >
         <div className="flexCenter gap-x-1">
-          <MdCategory />
+          <IoMdMale />
           Men's
         </div>
       </NavLink>
@@ -27,7 +30,7 @@ function Navbar({ containerStyles }) {
         className={({ isActive }) => (isActive ? "active_link" : "")}
       >
         <div className="flexCenter gap-x-1">
-          <MdShop2 />
+          <IoMdFemale />
           Women's
         </div>
       </NavLink>
@@ -55,7 +58,7 @@ function Navbar({ containerStyles }) {
         className={({ isActive }) => (isActive ? "active_link" : "")}
       >
         <div className="flexCenter gap-x-1">
-          <FaClipboardList />
+          <MdAdd />
           Add Product
         </div>
       </NavLink>

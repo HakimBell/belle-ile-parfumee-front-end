@@ -1,5 +1,5 @@
 import { NavLink, useNavigate, Link } from "react-router-dom";
-import logo from "../assets/logo.svg";
+import logo from "../assets/logo.png";
 import Navbar from "./Navbar";
 import { MdClose, MdMenu } from "react-icons/md";
 import { CgLogOut } from "react-icons/cg";
@@ -28,7 +28,7 @@ const Header = () => {
         {/* logo */}
         <div>
           <Link>
-            <img src={logo} alt="" height={88} width={66} />
+            <img src={logo} alt="" height={100} width={100} />
           </Link>
         </div>
 

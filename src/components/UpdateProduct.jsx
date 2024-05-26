@@ -1,43 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // Import de useParams pour récupérer les paramètres d'URL
 import { useSnackbar } from "notistack";
-import { IoMdAdd } from "react-icons/io";
 import updateParfum from "../assets/update-parfum.jpg";
 
-function AddProduct() {
-  const navigate = useNavigate();
-  const { enqueueSnackbar } = useSnackbar();
-
-  const [formData, setFormData] = useState({
+function UpdateProduct() {
+  const { productId } = useParams();
+  const [productData, setProductData] = useState({
     name: "",
     description: "",
     ml: "",
     price: "",
     image: "",
-    gender: "Masculin",
   });
+  const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar(); // Utilisation du hook useSnackbar
+
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:4567/products/${productId}`
+        );
+        setProductData(response.data);
+      } catch (error) {
+        console.error(
+          "Une erreur s'est produite lors de la récupération des données du produit :",
+          error
+        );
+      }
+    };
+
+    fetchProductData();
+  }, [productId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setProductData({ ...productData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:4567/products/add-product",
-        formData
+      await axios.put(
+        `http://localhost:4567/products/${productId}/update-product`,
+        productData
       );
-      console.log("Réponse du serveur:", response.data);
-      enqueueSnackbar("Ajout Produit réussie!", { variant: "success" });
+      enqueueSnackbar("Produit modifié avec succés!", { variant: "success" });
       navigate("/home");
     } catch (error) {
-      console.error("Erreur:", error.message);
-      enqueueSnackbar("Erreur lors de l'ajout d'un produit.", {
-        variant: "error",
-      });
+      console.error(
+        "Une erreur s'est produite lors de la mise à jour du produit :",
+        error
+      );
     }
   };
 
@@ -61,7 +76,7 @@ function AddProduct() {
                 type="text"
                 placeholder="Name"
                 name="name"
-                value={formData.name}
+                value={productData.name}
                 onChange={handleChange}
                 className="border border-gray-400 py-1 px-2 w-full mb-2"
               />
@@ -69,7 +84,7 @@ function AddProduct() {
                 type="text"
                 placeholder="Description"
                 name="description"
-                value={formData.description}
+                value={productData.description}
                 onChange={handleChange}
                 className="border border-gray-400 py-1 px-2 w-full mb-2"
               />
@@ -77,7 +92,7 @@ function AddProduct() {
                 type="text"
                 placeholder="ml"
                 name="ml"
-                value={formData.ml}
+                value={productData.ml}
                 onChange={handleChange}
                 className="border border-gray-400 py-1 px-2 w-full mb-2"
               />
@@ -85,7 +100,7 @@ function AddProduct() {
                 type="number"
                 placeholder="Prix"
                 name="price"
-                value={formData.price}
+                value={productData.price}
                 onChange={handleChange}
                 className="border border-gray-400 py-1 px-2 w-full mb-2"
               />
@@ -93,7 +108,7 @@ function AddProduct() {
                 type="text"
                 placeholder="Image"
                 name="image"
-                value={formData.image}
+                value={productData.image}
                 onChange={handleChange}
                 className="border border-gray-400 py-1 px-2 w-full mb-2"
               />
@@ -102,7 +117,7 @@ function AddProduct() {
                 type="submit"
                 className="w-full bg-black py-3 text-center text-white"
               >
-                Ajouter
+                Modifier la fiche produit
               </button>
             </form>
           </div>
@@ -112,4 +127,4 @@ function AddProduct() {
   );
 }
 
-export default AddProduct;
+export default UpdateProduct;

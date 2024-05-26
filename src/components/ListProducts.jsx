@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { TbTrash } from "react-icons/tb";
+import { MdSystemUpdateAlt } from "react-icons/md";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 function ListProducts() {
@@ -52,10 +54,11 @@ function ListProducts() {
           <thead>
             <tr className="bg-primary bold-14 sm:regular-22 text-start py-12">
               <th className="p-2">Products</th>
-              <th className="p-2">Title</th>
-              <th className="p-2">Old Price</th>
-              <th className="p-2">New Price</th>
-              <th className="p-2">Category</th>
+              <th className="p-2">Nom</th>
+              <th className="p-2">Ml</th>
+              <th className="p-2">Price</th>
+              <th className="p-2">Genre</th>
+              <th className="p-2">Edit</th>
               <th className="p-2">Remove</th>
             </tr>
           </thead>
@@ -80,6 +83,13 @@ function ListProducts() {
                 <td>${product.ml}</td>
                 <td>${product.price}</td>
                 <td>{product.gender}</td>
+                <td>
+                  <div className="bold-22 pl-6 sm:pl-14">
+                    <Link to={`/edit/${product.id}`}>
+                      <MdSystemUpdateAlt />
+                    </Link>
+                  </div>
+                </td>
                 <td>
                   <div className="bold-22 pl-6 sm:pl-14">
                     <TbTrash onClick={() => remove_product(product.id)} />

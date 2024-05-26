@@ -5,6 +5,9 @@ import { IoMdMale } from "react-icons/io";
 import { FaClipboardList } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 function Navbar({ containerStyles }) {
+  const userData = JSON.parse(localStorage.getItem("user"));
+  const isAdmin = userData ? userData.userRole : false;
+  console.log(isAdmin);
   return (
     <nav className={`${containerStyles}`}>
       <NavLink
@@ -43,25 +46,28 @@ function Navbar({ containerStyles }) {
           Mixte
         </div>
       </NavLink>
-
-      <NavLink
-        to={"/listproduct"}
-        className={({ isActive }) => (isActive ? "active_link" : "")}
-      >
-        <div className="flexCenter gap-x-1">
-          <FaClipboardList />
-          Product List
-        </div>
-      </NavLink>
-      <NavLink
-        to={"/addproduct"}
-        className={({ isActive }) => (isActive ? "active_link" : "")}
-      >
-        <div className="flexCenter gap-x-1">
-          <MdAdd />
-          Add Product
-        </div>
-      </NavLink>
+      {isAdmin && (
+        <NavLink
+          to={"/listproduct"}
+          className={({ isActive }) => (isActive ? "active_link" : "")}
+        >
+          <div className="flexCenter gap-x-1">
+            <FaClipboardList />
+            Product List
+          </div>
+        </NavLink>
+      )}
+      {isAdmin && (
+        <NavLink
+          to={"/addproduct"}
+          className={({ isActive }) => (isActive ? "active_link" : "")}
+        >
+          <div className="flexCenter gap-x-1">
+            <MdAdd />
+            Add Product
+          </div>
+        </NavLink>
+      )}
     </nav>
   );
 }

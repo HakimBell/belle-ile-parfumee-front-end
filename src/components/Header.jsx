@@ -1,5 +1,5 @@
 import { NavLink, useNavigate, Link } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.svg";
 import Navbar from "./Navbar";
 import { MdClose, MdMenu } from "react-icons/md";
 import { CgLogOut } from "react-icons/cg";
@@ -28,7 +28,7 @@ const Header = () => {
         {/* logo */}
         <div>
           <Link>
-            <img src={logo} alt="" height={88} width={66} />
+            <img src={logo} alt="" height={88} width={86} />
           </Link>
         </div>
 
@@ -60,15 +60,18 @@ const Header = () => {
           <div className="flexBetween sm:gap-x-6">
             <NavLink to={"cart-page"} className={"flex"}>
               <FaOpencart className="p-1 h-8 w-8 ring-slate-900/30 ring-1 rounded-full" />
-              <span className="relative flexCenter w-5 h-5 rounded-full bg-secondary text-white medium-14 -top-2">
+              <span className="relative flexCenter w-5 h-5 rounded-full bg-[#3963D7] text-white medium-14 -top-2">
                 {getTotalCartItems()}
               </span>
             </NavLink>
             <NavLink
               to={"login"}
-              className={"btn_secondary_rounded flexCenter gap-x-2 medium-16"}
+              className={"btn_secondary_rounded flexCenter  gap-x-2 medium-16"}
             >
-              <button onClick={handleLogout}>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-3"
+              >
                 <CgLogOut />
                 Logout
               </button>

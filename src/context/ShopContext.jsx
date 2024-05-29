@@ -44,7 +44,7 @@ const ShopContextProvider = (props) => {
         null,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Inclure le token dans les en-têtes de la requête
+            Authorization: `Bearer ${token}`, 
           },
         }
       );
@@ -93,7 +93,7 @@ const ShopContextProvider = (props) => {
         `http://localhost:4567/products/${userId}/cart`,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Inclure le token dans les en-têtes de la requête
+            Authorization: `Bearer ${token}`,
           },
         }
       );

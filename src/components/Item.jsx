@@ -25,11 +25,11 @@ const Item = ({ id, name, ml, price, image }) => {
         <h4 className="my-[6px] medium-16 line-clamp-2 text-gray-30">{name}</h4>
         <div className="flex justify-between gap-5">
           <div className="bold-16">{ml}</div>
-          <div className="text-secondary bold-16 ">{price}€</div>
+          <div className="text-[#3963D7] bold-16 ">{price}€</div>
         </div>
         <button
           onClick={() => addToCart(id)}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-[#3963D7] text-white font-bold py-2 px-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           Ajouter au panier
         </button>

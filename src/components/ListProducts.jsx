@@ -96,14 +96,14 @@ function ListProducts() {
                 <td>${product.price}</td>
                 <td>{product.gender}</td>
                 <td>
-                  <div className="bold-22 pl-6 sm:pl-14">
+                  <div className="bold-22 pl-6 flex flexCenter sm:pl-14">
                     <Link to={`/edit/${product.id}`}>
                       <MdSystemUpdateAlt />
                     </Link>
                   </div>
                 </td>
                 <td>
-                  <div className="bold-22 pl-6 sm:pl-14">
+                  <div className="bold-22 pl-6 flex flexCenter sm:pl-14">
                     <TbTrash onClick={() => remove_product(product.id)} />
                   </div>
                 </td>

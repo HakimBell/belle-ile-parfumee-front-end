@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom"; // Import de useParams pour récupérer les paramètres d'URL
+import { useParams, useNavigate } from "react-router-dom"; 
 import { useSnackbar } from "notistack";
 import updateParfum from "../assets/update-parfum.jpg";
 
@@ -15,7 +15,7 @@ function UpdateProduct() {
     image: "",
   });
   const navigate = useNavigate();
-  const { enqueueSnackbar } = useSnackbar(); // Utilisation du hook useSnackbar
+  const { enqueueSnackbar } = useSnackbar(); 
 
   useEffect(() => {
     const fetchProductData = async () => {
